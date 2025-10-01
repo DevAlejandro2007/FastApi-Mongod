@@ -175,33 +175,16 @@ pytest
 ```
 FastApi-Mongod/
 ├─ api/
-│  ├─ main.py              # Punto de entrada de la app (FastAPI instance)
+│  ├─ main.py
+│  ├─ config.py
+│  ├─ templates/
+│  │   ├─ index.html
+│  │    ├─ login.html
+│  │    └─ register.html
 │  ├─ routers/             # Rutas (endpoints)
 │  │   ├─ __init__.py
 │  │   ├─ items.py
 │  │   └─ users.py
-│  ├─ schemas/             # Modelos Pydantic (validación de entrada/salida)
-│  │   ├─ __init__.py
-│  │   ├─ item_schema.py
-│  │   └─ user_schema.py
-│  ├─ services/            # Lógica de negocio / CRUD
-│  │   ├─ __init__.py
-│  │   ├─ item_service.py
-│  │   └─ user_service.py
-│  ├─ models/              # Modelos de DB si decides usarlos (ej: ODM)
-│  │   └─ __init__.py
-│  ├─ core/                # Configuración y utilidades base
-│  │   ├─ __init__.py
-│  │   ├─ config.py        # Configuración con Pydantic BaseSettings
-│  │   └─ security.py      # Manejo de JWT, hashing, etc (si lo agregas)
-│  ├─ db.py                # Conexión a MongoDB (Motor)
-│  └─ utils/               # Funciones auxiliares
-│      └─ __init__.py
-├─ tests/                  # Pruebas con pytest
-│  ├─ __init__.py
-│  ├─ test_items.py
-│  └─ test_users.py
-├─ .env.example            # Variables de entorno de ejemplo
 ├─ requirements.txt        # Dependencias principales
 ├─ requirements-dev.txt    # Dependencias para desarrollo y testing
 ├─ README.md               # Documentación del proyecto
