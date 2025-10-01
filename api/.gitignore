@@ -46,4 +46,4 @@ pyvenv.cfg
 *.tmp
 *.swp
 
-
+.venv

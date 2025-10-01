@@ -1,6 +1,6 @@
 # FastApi-Mongod
 
-> Proyecto: API con FastAPI + MongoDB (Motor). Este repo es el primer proyecto del autor; este README propone una versión profesional, clara y lista para que otros desarrolladores lo usen y contribuyan.
+> Proyecto: API con FastAPI + MongoDB (Motor). Este repo es el primer proyecto del autor
 
 ---
 
@@ -118,14 +118,10 @@ PORT=8000
 Si el punto de entrada de la aplicación es `main.py` en la raíz:
 
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+fastapi dev main.py
 ```
+debes de estar en la misma carpeta para ejecutarlo, sino, no reconocera tu archivo main.py
 
-Si tu punto de entrada está dentro de la carpeta `api` (por ejemplo `api/main.py`):
-
-```bash
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
-```
 
 Ajusta la ruta si tu archivo se llama distinto. `--reload` es útil en desarrollo; no lo uses en producción.
 
@@ -138,7 +134,7 @@ Una vez la app esté corriendo, FastAPI provee documentación automática:
 * Swagger UI: `http://localhost:8000/docs`
 * ReDoc: `http://localhost:8000/redoc`
 
-Incluye un resumen corto de los endpoints en la sección *Estructura recomendada del repo*.
+Incluye un resumen corto de los endpoints en la sección .
 
 ---
 
@@ -175,7 +171,6 @@ pytest
 
 ## Estructura recomendada del repo
 
-Sugerencia de organización para aumentar claridad y escalabilidad:
 
 ```
 FastApi-Mongod/
@@ -232,13 +227,6 @@ FastApi-Mongod/
 2. Abre un branch (`git checkout -b feat/mi-cambio`).
 3. Haz un PR con descripción clara.
 
----
-
-## Licencia
-
-Indica aquí la licencia del proyecto (por ejemplo MIT). Si no deseas publicar una licencia, remueve esta sección o añade `UNLICENSED`.
-
----
 
 ## Archivos sugeridos
 
@@ -248,7 +236,7 @@ A continuación agrego el contenido sugerido para `requirements.txt` y `requirem
 
 ```text
 fastapi
-uvicorn[standard]
+uvicorn[standard] -- este ya lo incluye FastApi
 motor
 python-dotenv
 ```
