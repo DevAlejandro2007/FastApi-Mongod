@@ -1,3 +1,5 @@
+![Static Badge](https://img.shields.io/badge/Python-3.13.2-blue?logo=Python&logoColor=blue), ![Static Badge](https://img.shields.io/badge/Git--orange?logo=Git&logoColor=orange), ![Static Badge](https://img.shields.io/badge/Github--grey?logo=Github&logoColor=black), ![Static Badge](https://img.shields.io/badge/FAST-API-brightgreen?style=flat&logo=Python)
+
 # FastApi-Mongod
 
 > Proyecto: API con FastAPI + MongoDB (Motor). Este repo es el primer proyecto del autor; este README propone una versión profesional, clara y lista para que otros desarrolladores lo usen y contribuyan.
