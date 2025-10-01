@@ -1,265 +1,154 @@
-![Static Badge](https://img.shields.io/badge/Python-3.13.2-blue?logo=Python&logoColor=blue), ![Static Badge](https://img.shields.io/badge/Git--orange?logo=Git&logoColor=orange), ![Static Badge](https://img.shields.io/badge/Github--grey?logo=Github&logoColor=black), ![Static Badge](https://img.shields.io/badge/FAST-API-brightgreen?style=flat&logo=Python)
-
-# FastApi-Mongod
-
-> Proyecto: API con FastAPI + MongoDB (Motor). Este repo es el primer proyecto del autor; este README propone una versión profesional, clara y lista para que otros desarrolladores lo usen y contribuyan.
+Aquí tienes un **esqueleto profesional** para tu proyecto FastAPI + MongoDB. Lo puedes usar como base y adaptarlo a tu código actual.
 
 ---
 
-## Tabla de contenidos
-
-* [Descripción](#descripción)
-* [Características](#características)
-* [Tecnologías](#tecnologías)
-* [Requisitos previos](#requisitos-previos)
-* [Instalación (local)](#instalación-local)
-* [Variables de entorno](#variables-de-entorno)
-* [Ejecutar la aplicación](#ejecutar-la-aplicación)
-* [Documentación de la API](#documentación-de-la-api)
-* [Ejemplos de peticiones](#ejemplos-de-peticiones)
-* [Tests](#tests)
-* [Estructura recomendada del repo](#estructura-recomendada-del-repo)
-* [Buenas prácticas y siguientes pasos](#buenas-prácticas-y-siguientes-pasos)
-* [Contribuir](#contribuir)
-* [Licencia](#licencia)
-
----
-
-## Descripción
-
-API construida con **FastAPI** y **MongoDB** (driver asíncrono *motor*). Proporciona endpoints REST para operar con la base de datos. Este README está pensado para que cualquier desarrollador pueda clonar, configurar y ejecutar el proyecto en su máquina.
-
-> Nota: el archivo `base.py` es una guía interna del autor y se debe **ignorar** al revisar la lógica principal.
-
----
-
-## Características
-
-* Endpoints REST construidos con FastAPI
-* Conexión asíncrona a MongoDB usando `motor`
-* Documentación automática con Swagger UI y Redoc
-* Estructura modular (routers, esquemas, servicios)
-
----
-
-## Tecnologías
-
-* Python 3.10+ (recomendado)
-* FastAPI
-* Uvicorn (servidor ASGI)
-* Motor (MongoDB async driver)
-* python-dotenv (variables de entorno)
-
----
-
-## Requisitos previos
-
-* Git
-* Python 3.10 o superior
-* MongoDB (local o en la nube: Atlas / MongoDB URI)
-
----
-
-## Instalación (local)
-
-1. Clona el repo:
-
-```bash
-git clone https://github.com/DevAlejandro2007/FastApi-Mongod.git
-cd FastApi-Mongod
-```
-
-2. Crea y activa un entorno virtual (recomendado):
-
-```bash
-python -m venv .venv
-# macOS / Linux
-source .venv/bin/activate
-# Windows
-.\.venv\Scripts\activate
-```
-
-3. Instala dependencias:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Crea un archivo `.env` o exporta las variables necesarias (ver sección *Variables de entorno*).
-
----
-
-## Variables de entorno
-
-Crea un archivo `.env` en la raíz con al menos estas variables (ejemplo):
-
-```
-MONGODB_URI=mongodb://localhost:27017
-DATABASE_NAME=fastapi_db
-# Opcionales/útiles
-SECRET_KEY=alguna-clave-secreta
-HOST=0.0.0.0
-PORT=8000
-```
-
-> Añade `.env` al `.gitignore` para no subir credenciales. Puedes incluir un `.env.example` en el repo con las claves sin valores reales.
-
----
-
-## Ejecutar la aplicación
-
-Si el punto de entrada de la aplicación es `main.py` en la raíz:
-
-```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-Si tu punto de entrada está dentro de la carpeta `api` (por ejemplo `api/main.py`):
-
-```bash
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-Ajusta la ruta si tu archivo se llama distinto. `--reload` es útil en desarrollo; no lo uses en producción.
-
----
-
-## Documentación de la API
-
-Una vez la app esté corriendo, FastAPI provee documentación automática:
-
-* Swagger UI: `http://localhost:8000/docs`
-* ReDoc: `http://localhost:8000/redoc`
-
-Incluye un resumen corto de los endpoints en la sección *Estructura recomendada del repo*.
-
----
-
-## Ejemplos de peticiones
-
-Ejemplo `GET` a un endpoint `/items`:
-
-```bash
-curl -X GET "http://localhost:8000/items" -H "accept: application/json"
-```
-
-Ejemplo `POST` (JSON):
-
-```bash
-curl -X POST "http://localhost:8000/items" -H "Content-Type: application/json" -d '{"name":"ejemplo","price":10.5}'
-```
-
-Asegúrate de revisar los `schemas` (Pydantic) para los formatos esperados.
-
----
-
-## Tests
-
-Se recomienda incluir tests con `pytest` y `httpx` (cliente asíncrono) y `pytest-asyncio`.
-
-Ejemplo (instalación de paquetes de desarrollo):
-
-```bash
-pip install -r requirements-dev.txt
-pytest
-```
-
----
-
-## Estructura recomendada del repo
-
-Sugerencia de organización para aumentar claridad y escalabilidad:
+## 📂 Estructura recomendada del proyecto
 
 ```
 FastApi-Mongod/
 ├─ api/
-│  ├─ main.py            # entrada de la app (FastAPI instance)
-│  ├─ routers/           # routers por dominio (users, items, auth...)
-│  ├─ services/          # lógica de negocio / CRUD
-│  ├─ models/            # modelos Pydantic + modelos de DB si aplica
-│  ├─ db.py              # conexión a Mongo (motor)
-│  └─ utils/             # utilidades
-├─ tests/
-├─ .env.example
-├─ requirements.txt
-├─ requirements-dev.txt
-├─ README.md
+│  ├─ main.py              # Punto de entrada de la app (FastAPI instance)
+│  ├─ routers/             # Rutas (endpoints)
+│  │   ├─ __init__.py
+│  │   ├─ items.py
+│  │   └─ users.py
+│  ├─ schemas/             # Modelos Pydantic (validación de entrada/salida)
+│  │   ├─ __init__.py
+│  │   ├─ item_schema.py
+│  │   └─ user_schema.py
+│  ├─ services/            # Lógica de negocio / CRUD
+│  │   ├─ __init__.py
+│  │   ├─ item_service.py
+│  │   └─ user_service.py
+│  ├─ models/              # Modelos de DB si decides usarlos (ej: ODM)
+│  │   └─ __init__.py
+│  ├─ core/                # Configuración y utilidades base
+│  │   ├─ __init__.py
+│  │   ├─ config.py        # Configuración con Pydantic BaseSettings
+│  │   └─ security.py      # Manejo de JWT, hashing, etc (si lo agregas)
+│  ├─ db.py                # Conexión a MongoDB (Motor)
+│  └─ utils/               # Funciones auxiliares
+│      └─ __init__.py
+├─ tests/                  # Pruebas con pytest
+│  ├─ __init__.py
+│  ├─ test_items.py
+│  └─ test_users.py
+├─ .env.example            # Variables de entorno de ejemplo
+├─ requirements.txt        # Dependencias principales
+├─ requirements-dev.txt    # Dependencias para desarrollo y testing
+├─ README.md               # Documentación del proyecto
 └─ .gitignore
 ```
 
 ---
 
-## Buenas prácticas y siguientes pasos (priorizados)
+## 📝 Ejemplo de archivos clave
 
-1. **Documentación**: este README ya es una base; agrega ejemplos concretos de los endpoints más importantes.
-2. **Config**: centralizar configuración con Pydantic `BaseSettings`.
-3. **Seguridad**: nunca subir credenciales; considera autenticación (JWT) si la API lo requiere.
-4. **Tests**: agrega tests unitarios y de integración.
-5. **CI**: añade GitHub Actions para ejecutar `pytest` en PRs.
-6. **Linting/formatting**: `black`, `ruff`/`flake8` y `isort`.
+### `api/main.py`
 
----
+```python
+from fastapi import FastAPI
+from .routers import items, users
 
-## Contribuir
+app = FastAPI(title="FastApi-Mongod")
 
-1. Crea una issue para describir tu aporte.
-2. Abre un branch (`git checkout -b feat/mi-cambio`).
-3. Haz un PR con descripción clara.
+# Registrar routers
+app.include_router(items.router, prefix="/items", tags=["items"])
+app.include_router(users.router, prefix="/users", tags=["users"])
 
----
-
-## Licencia
-
-Indica aquí la licencia del proyecto (por ejemplo MIT). Si no deseas publicar una licencia, remueve esta sección o añade `UNLICENSED`.
-
----
-
-## Archivos sugeridos
-
-A continuación agrego el contenido sugerido para `requirements.txt` y `requirements-dev.txt`. Guarda estos contenidos en archivos separados en la raíz del repo.
-
-### requirements.txt (runtime)
-
-```text
-fastapi
-uvicorn[standard]
-motor
-python-dotenv
+@app.get("/")
+async def root():
+    return {"message": "Bienvenido a FastApi-Mongod 🚀"}
 ```
 
-### requirements-dev.txt (desarrollo / testing)
+### `api/core/config.py`
 
-```text
-pytest
-pytest-asyncio
-httpx
-pytest-cov
-black
-ruff
+```python
+from pydantic import BaseSettings
+
+class Settings(BaseSettings):
+    MONGODB_URI: str = "mongodb://localhost:27017"
+    DATABASE_NAME: str = "fastapi_db"
+    SECRET_KEY: str = "supersecret"
+
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
 ```
 
----
+### `api/db.py`
 
-## Cómo aplicar los cambios al repo (guía rápida)
+```python
+from motor.motor_asyncio import AsyncIOMotorClient
+from .core.config import settings
 
-```bash
-# desde la raíz del repo
-# 1) crear archivos
-# (a) README.md -> pegar la sección README
-# (b) requirements.txt -> pegar el bloque arriba
-# (c) opcional: requirements-dev.txt y .env.example
-
-git add README.md requirements.txt requirements-dev.txt .env.example
-git commit -m "chore: improve README and add requirements files"
-git push origin main
+client = AsyncIOMotorClient(settings.MONGODB_URI)
+db = client[settings.DATABASE_NAME]
 ```
 
----
+### `api/routers/items.py`
 
-Si quieres, puedo:
+```python
+from fastapi import APIRouter, HTTPException
+from ..schemas.item_schema import Item
+from ..services.item_service import get_items, create_item
 
-* Generar el contenido listo para `README.md` y un `requirements.txt` como archivos descargables.
-* Preparar el diff/patch para que puedas aplicar con `git apply`.
-* Hacer una revisión específica del `api/` y adaptar el README con ejemplos reales de tus endpoints (para eso necesitaría que me confirmes el módulo de entrada: `main.py` o `api/main.py`).
+router = APIRouter()
 
-Dime qué prefieres y continúo con el siguiente paso.
+@router.get("/", response_model=list[Item])
+async def list_items():
+    return await get_items()
+
+@router.post("/", response_model=Item)
+async def add_item(item: Item):
+    new_item = await create_item(item)
+    if not new_item:
+        raise HTTPException(status_code=400, detail="No se pudo crear el item")
+    return new_item
+```
+
+### `api/schemas/item_schema.py`
+
+```python
+from pydantic import BaseModel
+
+class Item(BaseModel):
+    name: str
+    price: float
+```
+
+### `api/services/item_service.py`
+
+```python
+from ..db import db
+from ..schemas.item_schema import Item
+
+collection = db["items"]
+
+async def get_items():
+    items = await collection.find().to_list(100)
+    return items
+
+async def create_item(item: Item):
+    result = await collection.insert_one(item.dict())
+    if result.inserted_id:
+        return {"id": str(result.inserted_id), **item.dict()}
+    return None
+```
+
+### `tests/test_items.py`
+
+```python
+import pytest
+from httpx import AsyncClient
+from api.main import app
+
+@pytest.mark.asyncio
+async def test_root():
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+        response = await ac.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Bienvenido a FastApi-Mongod 🚀"}
+```
+
