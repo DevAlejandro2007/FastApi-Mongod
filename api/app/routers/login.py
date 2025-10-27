@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse, HTMLResponse
 from config import templates, COLECCION
 
 router = APIRouter(
-    prefix="/login",
+    prefix="/login",        
     tags=["Login"],
     responses={404: {"message": "Página no encontrada"}}
 )
