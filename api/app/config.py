@@ -19,3 +19,4 @@ try:
 except Exception as e:
     print("⛔ Error conectando a MongoDB:", e)
     COLECCION = None
+    
